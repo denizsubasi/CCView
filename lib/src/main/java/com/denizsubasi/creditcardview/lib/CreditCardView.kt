@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater.from
 import android.widget.LinearLayout
-import com.denizsubasi.creditcardview.lib.adapter.CardDetailsViewPagerAdapter
 import com.denizsubasi.creditcardview.lib.databinding.LayoutCreditCardBinding
 
 class CreditCardView @JvmOverloads constructor(
@@ -17,19 +16,25 @@ class CreditCardView @JvmOverloads constructor(
     private val viewBinding: LayoutCreditCardBinding =
         LayoutCreditCardBinding.inflate(from(context), this, true)
 
-    private lateinit var cardDetailsViewPagerAdapter: CardDetailsViewPagerAdapter
-
     init {
         viewBinding.cardHolderNameTextView.text = "Deniz Subaşı"
         viewBinding.cardNumberTextView.text = "1244 4343 3434 3434"
-        initCardDetailsView()
+    }
+
+    fun setCardNumber(number: String) {
+        viewBinding.cardNumberTextView.text = number
+    }
+
+    fun setCardHolderName(holderName: String) {
+        viewBinding.cardHolderNameTextView.text = holderName
+    }
+
+    fun setCardCvv(cvv: Int) {
 
     }
 
-    private fun initCardDetailsView() {
-        cardDetailsViewPagerAdapter =
-            CardDetailsViewPagerAdapter(context)
-        viewBinding.cardDetailsViewPager.adapter = cardDetailsViewPagerAdapter
+    fun setCardExpiryDate(expiryDate: String) {
+        viewBinding.expiryDateTextView.text = expiryDate
     }
 
 }

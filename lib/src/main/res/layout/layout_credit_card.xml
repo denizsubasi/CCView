@@ -6,11 +6,6 @@
 
     </data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -88,9 +83,4 @@
 
         </RelativeLayout>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/cardDetailsViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 </layout>

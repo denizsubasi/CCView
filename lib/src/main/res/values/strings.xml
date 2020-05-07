@@ -15,5 +15,6 @@
     <string name="error_invalid_month">Geçersiz Tarih</string>
     <string name="name_on_card">Kartın Üzerindeki İsim</string>
     <string name="card_holder_name_sample">Deniz Subaşı</string>
+    <string name="next">Next</string>
 
 </resources>
