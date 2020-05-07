@@ -11,10 +11,18 @@
         android:layout_height="match_parent">
 
         <com.denizsubasi.creditcardview.lib.CreditCardView
+            android:id="@+id/creditCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/cardDetailsViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/creditCardView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

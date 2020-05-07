@@ -6,81 +6,91 @@
 
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="@dimen/margin_16dp"
-        android:background="@drawable/credit_card_background"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/cardTypeImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="@dimen/margin_12dp"
-            android:src="@android:drawable/ic_dialog_alert" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/cardNumberTextView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:paddingStart="@dimen/padding_12dp"
-            android:paddingEnd="@dimen/padding_12dp"
-            android:text="@string/card_number_place_holder"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_large"
-            app:autoSizeTextType="uniform" />
+            android:layout_height="200dp"
+            android:layout_margin="@dimen/margin_16dp"
+            android:background="@drawable/credit_card_background"
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/cardHolderNamePlaceHolderTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/cardHolderNameTextView"
-            android:paddingStart="@dimen/padding_16dp"
-            android:paddingEnd="@dimen/padding_16dp"
-            android:text="@string/hint_card_holder"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_regular" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cardTypeImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/margin_12dp"
+                android:src="@android:drawable/ic_dialog_alert" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/cardHolderNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:paddingStart="@dimen/padding_16dp"
-            android:paddingEnd="@dimen/padding_16dp"
-            android:paddingBottom="@dimen/padding_16dp"
-            android:text="@string/hint_name_and_surname"
-            android:textColor="@android:color/darker_gray" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cardNumberTextView"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:paddingStart="@dimen/padding_12dp"
+                android:paddingEnd="@dimen/padding_12dp"
+                android:text="@string/card_number_place_holder"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_large"
+                app:autoSizeTextType="uniform" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/expiryDatePlaceHolderTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/expiryDateTextView"
-            android:layout_alignParentEnd="true"
-            android:paddingStart="@dimen/padding_16dp"
-            android:paddingEnd="@dimen/padding_16dp"
-            android:text="@string/hint_card_expiry_date"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_regular" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cardHolderNamePlaceHolderTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/cardHolderNameTextView"
+                android:paddingStart="@dimen/padding_16dp"
+                android:paddingEnd="@dimen/padding_16dp"
+                android:text="@string/place_holder_card_holder"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_regular" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/expiryDateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:paddingStart="@dimen/padding_16dp"
-            android:paddingEnd="@dimen/padding_16dp"
-            android:paddingBottom="@dimen/padding_16dp"
-            android:text="@string/hint_mm_yy"
-            android:textColor="@android:color/darker_gray" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cardHolderNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:paddingStart="@dimen/padding_16dp"
+                android:paddingEnd="@dimen/padding_16dp"
+                android:paddingBottom="@dimen/padding_16dp"
+                android:text="@string/place_holder_name_and_surname"
+                android:textColor="@android:color/darker_gray" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/expiryDatePlaceHolderTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/expiryDateTextView"
+                android:layout_alignParentEnd="true"
+                android:paddingStart="@dimen/padding_16dp"
+                android:paddingEnd="@dimen/padding_16dp"
+                android:text="@string/place_holder_card_expiry_date"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_regular" />
 
-    </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/expiryDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:paddingStart="@dimen/padding_16dp"
+                android:paddingEnd="@dimen/padding_16dp"
+                android:paddingBottom="@dimen/padding_16dp"
+                android:text="@string/hint_mm_yy"
+                android:textColor="@android:color/darker_gray" />
+
+        </RelativeLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/cardDetailsViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </layout>
