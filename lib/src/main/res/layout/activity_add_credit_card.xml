@@ -15,6 +15,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/typeInYourCardDetailsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_16dp"
+            android:text="@string/type_in_your_card_details"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_xlarge" />
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/cardDetailsViewPager"
             android:layout_width="match_parent"

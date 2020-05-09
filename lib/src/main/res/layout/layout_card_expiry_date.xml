@@ -25,6 +25,8 @@
             android:id="@+id/cardExpiryDateEditText"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
             android:padding="@dimen/padding_8dp"
             android:layout_marginStart="@dimen/margin_16dp"
             android:layout_marginEnd="@dimen/margin_16dp"

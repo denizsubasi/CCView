@@ -26,6 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="@dimen/margin_16dp"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
             android:layout_marginEnd="@dimen/margin_16dp"
             android:background="@drawable/input_field_background"
             android:padding="@dimen/padding_8dp"

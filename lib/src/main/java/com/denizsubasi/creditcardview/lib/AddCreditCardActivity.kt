@@ -42,20 +42,24 @@ class AddCreditCardActivity : AppCompatActivity() {
             viewBinding.cardDetailsViewPager.currentItem + 1
     }
 
-    private fun onCardNumberChanged(number: String) {
+    private fun onCardNumberChanged(number: String, goNextField: Boolean = false) {
         viewBinding.creditCardView.setCardNumber(number)
+        if (goNextField) nextInputField()
     }
 
-    private fun onCardHolderNameChanged(holderName: String) {
+    private fun onCardHolderNameChanged(holderName: String, goNextField: Boolean = false) {
         viewBinding.creditCardView.setCardHolderName(holderName)
+        if (goNextField) nextInputField()
     }
 
-    private fun onCardCvvChanged(cvv: Int) {
+    private fun onCardCvvChanged(cvv: Int, goNextField: Boolean = false) {
         viewBinding.creditCardView.setCardCvv(cvv)
+        if (goNextField) nextInputField()
     }
 
-    private fun onCardExpiryDateChanged(expiryDate: String) {
+    private fun onCardExpiryDateChanged(expiryDate: String, goNextField: Boolean = false) {
         viewBinding.creditCardView.setCardExpiryDate(expiryDate)
+        if (goNextField) nextInputField()
     }
 
 
