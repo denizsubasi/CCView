@@ -5,7 +5,7 @@
     <string name="place_holder_card_holder">CARDHOLDER NAME</string>
     <string name="place_holder_name_and_surname">NAME SURNAME</string>
     <string name="place_holder_card_expiry_date">VALID THRU</string>
-    <string name="place_holder_cvv_front">0000</string>
+    <string name="place_holder_cvv">000</string>
     <string name="hint_mm_yy">AA/YY</string>
     <string name="hint_card_number">Card Number</string>
     <string name="hint_card_holder_name">Cardholder Name</string>

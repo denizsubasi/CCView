@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/margin_16dp"
+        android:background="@drawable/credit_card_background"
+        android:maxWidth="400dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/blackStripImageView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:src="@android:color/black"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/stripImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/blackStripImageView"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/sign_strip"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/blackStripImageView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cardCvvTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:paddingStart="@dimen/padding_12dp"
+            android:maxLength="3"
+            android:paddingEnd="@dimen/padding_12dp"
+            app:autoSizeMaxTextSize="@dimen/text_size_regular"
+            android:text="@string/place_holder_cvv"
+            android:textColor="@android:color/black"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="@id/stripImageView"
+            app:layout_constraintEnd_toEndOf="@id/stripImageView"
+            app:layout_constraintTop_toTopOf="@id/stripImageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
