@@ -11,7 +11,7 @@
 
         <include
             android:id="@+id/backView"
-            layout="@layout/layout_credit_card_background"
+            layout="@layout/layout_credit_card_back"
             />
 
         <include

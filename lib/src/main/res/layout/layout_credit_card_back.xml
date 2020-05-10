@@ -40,17 +40,24 @@
             android:id="@+id/cardCvvTextView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/margin_8dp"
             android:gravity="center"
-            android:paddingStart="@dimen/padding_12dp"
-            android:maxLength="3"
-            android:paddingEnd="@dimen/padding_12dp"
-            app:autoSizeMaxTextSize="@dimen/text_size_regular"
-            android:text="@string/place_holder_cvv"
+            android:maxLength="4"
             android:textColor="@android:color/black"
+            app:autoSizeMaxTextSize="@dimen/text_size_regular"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@id/stripImageView"
             app:layout_constraintEnd_toEndOf="@id/stripImageView"
             app:layout_constraintTop_toTopOf="@id/stripImageView" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cardTypeImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_12dp"
+            android:minHeight="45dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

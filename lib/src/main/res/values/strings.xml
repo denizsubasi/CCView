@@ -11,7 +11,7 @@
     <string name="hint_card_holder_name">Cardholder Name</string>
     <string name="hint_card_expiry_date">Valid Thru</string>
     <string name="hint_cvv">Secondary Code(CVV)</string>
-    <string name="card_number_place_holder">XXXX XXXX XXXX XXXX</string>
+    <string name="place_holder_card_number">XXXX XXXX XXXX XXXX</string>
     <string name="error_invalid_month">Geçersiz Tarih</string>
     <string name="name_on_card">Kartın Üzerindeki İsim</string>
     <string name="card_holder_name_sample">Deniz Subaşı</string>

@@ -12,6 +12,10 @@ import android.widget.LinearLayout
 import com.denizsubasi.creditcardview.lib.databinding.CreditCardViewBinding
 import com.denizsubasi.creditcardview.lib.ext.gone
 import com.denizsubasi.creditcardview.lib.ext.visible
+import com.denizsubasi.creditcardview.lib.utils.CardType
+import com.denizsubasi.creditcardview.lib.utils.CardType.*
+import com.denizsubasi.creditcardview.lib.utils.cardNumberMask
+import com.denizsubasi.creditcardview.lib.utils.format
 
 
 class CreditCardView @JvmOverloads constructor(
@@ -27,11 +31,11 @@ class CreditCardView @JvmOverloads constructor(
 
     init {
         viewBinding.frontView.cardHolderNameTextView.text = "Deniz Subaşı"
-        viewBinding.frontView.cardNumberTextView.text = "1244 4343 3434 3434"
     }
 
-    fun setCardNumber(number: String) {
-        viewBinding.frontView.cardNumberTextView.text = number
+    fun setCardNumber(cardNumber: String, cardType: CardType) {
+        viewBinding.frontView.cardNumberTextView.text = cardNumber
+        viewBinding.frontView.cardNumberTextView.format(cardType.cardNumberMask())
     }
 
     fun setCardHolderName(holderName: String) {
@@ -70,7 +74,7 @@ class CreditCardView @JvmOverloads constructor(
 
     }
 
-    fun showFrontOfCard(){
+    fun showFrontOfCard() {
         val back = ObjectAnimator.ofFloat(viewBinding.backView.root, "scaleX", 1f, 0f)
             .apply {
                 interpolator = DecelerateInterpolator()
@@ -101,4 +105,28 @@ class CreditCardView @JvmOverloads constructor(
         viewBinding.frontView.expiryDateTextView.text = expiryDate
     }
 
+    fun setCardType(cardType: CardType) {
+        when (cardType) {
+            UNKNOWN_CARD -> {
+                viewBinding.frontView.cardTypeImageView.setImageResource(0)
+                viewBinding.backView.cardTypeImageView.setImageResource(0)
+            }
+            AMEX_CARD -> {
+                viewBinding.frontView.cardTypeImageView.setImageResource(R.drawable.ic_amex)
+                viewBinding.backView.cardTypeImageView.setImageResource(R.drawable.ic_amex)
+            }
+            MASTER_CARD -> {
+                viewBinding.frontView.cardTypeImageView.setImageResource(R.drawable.ic_mastercard)
+                viewBinding.backView.cardTypeImageView.setImageResource(R.drawable.ic_mastercard)
+            }
+            VISA_CARD -> {
+                viewBinding.frontView.cardTypeImageView.setImageResource(R.drawable.ic_visa)
+                viewBinding.backView.cardTypeImageView.setImageResource(R.drawable.ic_visa)
+            }
+            DISCOVER_CARD -> {
+                viewBinding.frontView.cardTypeImageView.setImageResource(R.drawable.ic_discover)
+                viewBinding.backView.cardTypeImageView.setImageResource(R.drawable.ic_discover)
+            }
+        }
+    }
 }

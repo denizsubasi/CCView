@@ -29,8 +29,10 @@
             android:singleLine="true"
             android:imeOptions="actionDone"
             android:layout_marginStart="@dimen/margin_16dp"
+            android:inputType="number"
             android:layout_marginEnd="@dimen/margin_16dp"
             android:background="@drawable/input_field_background"
+            android:maxLength="4"
             android:textSize="@dimen/text_size_regular" />
 
     </LinearLayout>

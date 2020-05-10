@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -29,6 +30,7 @@
             android:singleLine="true"
             android:imeOptions="actionNext"
             android:layout_marginEnd="@dimen/margin_16dp"
+            android:inputType="number"
             android:background="@drawable/input_field_background"
             android:padding="@dimen/padding_8dp"
             android:textSize="@dimen/text_size_regular" />

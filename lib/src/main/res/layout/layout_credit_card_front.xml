@@ -19,8 +19,8 @@
             android:id="@+id/cardTypeImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="45dp"
             android:layout_margin="@dimen/margin_12dp"
-            android:src="@android:drawable/ic_dialog_alert"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:paddingStart="@dimen/padding_12dp"
             android:paddingEnd="@dimen/padding_12dp"
-            android:text="@string/card_number_place_holder"
+            android:text="@string/place_holder_card_number"
             android:textColor="@android:color/white"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="parent"

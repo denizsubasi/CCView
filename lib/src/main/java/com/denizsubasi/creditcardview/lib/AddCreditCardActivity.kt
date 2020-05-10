@@ -6,6 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
 import com.denizsubasi.creditcardview.lib.adapter.CardDetailsViewPagerAdapter
 import com.denizsubasi.creditcardview.lib.databinding.ActivityAddCreditCardBinding
+import com.denizsubasi.creditcardview.lib.utils.CardType
+import com.denizsubasi.creditcardview.lib.utils.cardLength
 
 class AddCreditCardActivity : AppCompatActivity() {
 
@@ -26,7 +28,8 @@ class AddCreditCardActivity : AppCompatActivity() {
         viewBinding.nextInputFieldButton.setOnClickListener {
             nextInputField()
         }
-        viewBinding.cardDetailsViewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener{
+        viewBinding.cardDetailsViewPager.addOnPageChangeListener(object :
+            ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
@@ -40,7 +43,7 @@ class AddCreditCardActivity : AppCompatActivity() {
 
             override fun onPageSelected(newPosition: Int) {
 
-                if(newPosition == 3){
+                if (newPosition == 3) {
                     viewBinding.creditCardView.showBackOfCard()
                 } else {
                     if (lastViewPagerPosition == 3) {
@@ -70,9 +73,14 @@ class AddCreditCardActivity : AppCompatActivity() {
             viewBinding.cardDetailsViewPager.currentItem + 1
     }
 
-    private fun onCardNumberChanged(number: String, goNextField: Boolean = false) {
-        viewBinding.creditCardView.setCardNumber(number)
-        if (goNextField) nextInputField()
+    private fun onCardNumberChanged(
+        number: String,
+        cardType: CardType,
+        goNextField: Boolean = false
+    ) {
+        viewBinding.creditCardView.setCardNumber(number, cardType)
+        viewBinding.creditCardView.setCardType(cardType)
+        if (goNextField || number.length == cardType.cardLength()) nextInputField()
     }
 
     private fun onCardHolderNameChanged(holderName: String, goNextField: Boolean = false) {
@@ -80,13 +88,13 @@ class AddCreditCardActivity : AppCompatActivity() {
         if (goNextField) nextInputField()
     }
 
-    private fun onCardCvvChanged(cvv: Int, goNextField: Boolean = false) {
-        viewBinding.creditCardView.setCardCvv(cvv)
-        if (goNextField) nextInputField()
-    }
-
     private fun onCardExpiryDateChanged(expiryDate: String, goNextField: Boolean = false) {
         viewBinding.creditCardView.setCardExpiryDate(expiryDate)
+        if (goNextField || expiryDate.length == 5) nextInputField()
+    }
+
+    private fun onCardCvvChanged(cvv: Int, goNextField: Boolean = false) {
+        viewBinding.creditCardView.setCardCvv(cvv)
         if (goNextField) nextInputField()
     }
 
