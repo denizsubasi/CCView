@@ -19,7 +19,7 @@
             android:layout_marginBottom="@dimen/margin_8dp"
             android:text="@string/hint_card_holder_name"
             android:textColor="@android:color/darker_gray"
-            android:textSize="@dimen/text_size_medium" />
+            android:textSize="@dimen/text_size_regular" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/cardholderNameEditText"

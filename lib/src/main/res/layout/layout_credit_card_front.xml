@@ -12,6 +12,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/margin_16dp"
         android:background="@drawable/credit_card_background"
+        app:elevation="10dp"
         android:maxWidth="400dp"
         android:orientation="vertical">
 
@@ -19,8 +20,8 @@
             android:id="@+id/cardTypeImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="45dp"
             android:layout_margin="@dimen/margin_12dp"
+            android:minHeight="45dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,9 +29,10 @@
             android:id="@+id/cardNumberTextView"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:fontFamily="@font/data_latin"
             android:gravity="center"
-            android:paddingStart="@dimen/padding_12dp"
-            android:paddingEnd="@dimen/padding_12dp"
+            android:paddingStart="@dimen/padding_16dp"
+            android:paddingEnd="@dimen/padding_16dp"
             android:text="@string/place_holder_card_number"
             android:textColor="@android:color/white"
             app:autoSizeTextType="uniform"
@@ -60,6 +62,7 @@
             android:paddingBottom="@dimen/padding_16dp"
             android:text="@string/place_holder_name_and_surname"
             android:textColor="@android:color/darker_gray"
+            android:fontFamily="@font/data_latin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -88,6 +91,7 @@
             android:paddingBottom="@dimen/padding_16dp"
             android:text="@string/hint_mm_yy"
             android:textColor="@android:color/darker_gray"
+            android:fontFamily="@font/data_latin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
