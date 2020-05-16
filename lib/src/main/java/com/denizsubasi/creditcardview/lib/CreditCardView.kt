@@ -6,10 +6,13 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater.from
+import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.denizsubasi.creditcardview.lib.databinding.CreditCardViewBinding
+import com.denizsubasi.creditcardview.lib.ext.afterMeasured
 import com.denizsubasi.creditcardview.lib.ext.gone
 import com.denizsubasi.creditcardview.lib.ext.visible
 import com.denizsubasi.creditcardview.lib.utils.CardType
@@ -31,19 +34,24 @@ class CreditCardView @JvmOverloads constructor(
 
     init {
         viewBinding.frontView.cardHolderNameTextView.text = "Deniz Subaşı"
+        viewBinding.frontView.cardNumberTextView.afterMeasured {
+            viewBinding.frontView.viewPointer.moveTo(this)
+        }
     }
 
     fun setCardNumber(cardNumber: String, cardType: CardType) {
         viewBinding.frontView.cardNumberTextView.text = cardNumber
         viewBinding.frontView.cardNumberTextView.format(cardType.cardNumberMask())
+        viewBinding.frontView.viewPointer.moveTo(viewBinding.frontView.cardNumberTextView)
     }
 
     fun setCardHolderName(holderName: String) {
+        viewBinding.frontView.viewPointer.moveTo(viewBinding.frontView.cardHolderNameTextView)
         viewBinding.frontView.cardHolderNameTextView.text = holderName
     }
 
-    fun setCardCvv(cvv: Int) {
-        viewBinding.backView.cardCvvTextView.text = cvv.toString()
+    fun setCardCvv(cvv: String) {
+        viewBinding.backView.cardCvvTextView.text = cvv
     }
 
     fun showBackOfCard() {
@@ -103,6 +111,7 @@ class CreditCardView @JvmOverloads constructor(
 
     fun setCardExpiryDate(expiryDate: String) {
         viewBinding.frontView.expiryDateTextView.text = expiryDate
+        viewBinding.frontView.viewPointer.moveTo(viewBinding.frontView.expiryDateTextView)
     }
 
     fun setCardType(cardType: CardType) {
@@ -129,4 +138,38 @@ class CreditCardView @JvmOverloads constructor(
             }
         }
     }
+
+    private fun View.moveTo(targetView: View) {
+        this.post {
+            animate()
+                .x(targetView.x)
+                .y(targetView.y - 10)
+                .setUpdateListener {
+                    layoutParams = ConstraintLayout.LayoutParams(
+                        targetView.width + 10,
+                        targetView.height + 10
+                    )
+                }
+                .start()
+        }
+    }
+
+    fun notifyPagerPositionChanged(newPosition: Int) {
+
+        when (newPosition) {
+            0 -> {
+                viewBinding.frontView.viewPointer.moveTo(viewBinding.frontView.cardNumberTextView)
+            }
+            1 -> {
+                viewBinding.frontView.viewPointer.moveTo(viewBinding.frontView.cardHolderNameTextView)
+            }
+            2 -> {
+                viewBinding.frontView.viewPointer.moveTo(viewBinding.frontView.expiryDateTextView)
+            }
+            else -> {
+                viewBinding.frontView.viewPointer.moveTo(viewBinding.frontView.cardNumberTextView)
+            }
+        }
+    }
+
 }

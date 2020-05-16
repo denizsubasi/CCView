@@ -24,7 +24,7 @@ class CardDetailsViewPagerAdapter(
     private val context: Context,
     private val cardNumberCallbackFunc: ((cardNumber: String, cardType: CardType, goNextField: Boolean) -> Unit),
     private val cardHolderNameCallbackFunc: ((holderName: String, goNextField: Boolean) -> Unit),
-    private val cardCvvCallbackFunc: ((cvv: Int, goNextField: Boolean) -> Unit),
+    private val cardCvvCallbackFunc: ((cvv: String, goNextField: Boolean) -> Unit),
     private val cardExpiryDateCallbackFunc: ((expiryDate: String, goNextField: Boolean) -> Unit)
 ) : PagerAdapter() {
 
@@ -55,7 +55,7 @@ class CardDetailsViewPagerAdapter(
                         onNext(hideKeyboard = false) {
                             if (it.isNotBlank()) {
                                 cardNumberCallbackFunc(
-                                    it.toString().replace(" ", ""),
+                                    it.replace(" ", ""),
                                     it.selectCardType(),
                                     true
                                 )
@@ -90,6 +90,7 @@ class CardDetailsViewPagerAdapter(
                             } else {
                                 cardExpiryDateEditText.background =
                                     getDrawable(context, R.drawable.input_field_error_background)
+                                cardExpiryDateCallbackFunc(it.toString(), false)
                             }
                         }
                         onNext(hideKeyboard = false) {
@@ -104,11 +105,11 @@ class CardDetailsViewPagerAdapter(
                 LayoutCardCvvBinding.inflate(inflater, container, true).apply {
                     cardCvvEditText.apply {
                         addTextChangedListener {
-                            cardCvvCallbackFunc(it.toString().toIntOrNull() ?: 0, false)
+                            cardCvvCallbackFunc(it.toString(), false)
                         }
                         onDone {
                             if (it.isNotBlank()) {
-                                cardCvvCallbackFunc(it.toIntOrNull() ?: 0, true)
+                                cardCvvCallbackFunc(it, true)
                             }
                         }
                     }

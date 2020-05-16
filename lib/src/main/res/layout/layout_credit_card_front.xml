@@ -12,9 +12,18 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/margin_16dp"
         android:background="@drawable/credit_card_background"
-        app:elevation="10dp"
         android:maxWidth="400dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:elevation="10dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/viewPointer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16dp"
+            android:background="@drawable/input_view_pointer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/cardTypeImageView"
@@ -29,10 +38,10 @@
             android:id="@+id/cardNumberTextView"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:layout_marginStart="@dimen/padding_16dp"
+            android:layout_marginEnd="@dimen/padding_16dp"
             android:fontFamily="@font/data_latin"
             android:gravity="center"
-            android:paddingStart="@dimen/padding_16dp"
-            android:paddingEnd="@dimen/padding_16dp"
             android:text="@string/place_holder_card_number"
             android:textColor="@android:color/white"
             app:autoSizeTextType="uniform"
@@ -56,13 +65,12 @@
             android:id="@+id/cardHolderNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:paddingStart="@dimen/padding_16dp"
-            android:paddingEnd="@dimen/padding_16dp"
-            android:paddingBottom="@dimen/padding_16dp"
+            android:layout_margin="@dimen/margin_8dp"
+            android:fontFamily="@font/data_latin"
+            android:padding="@dimen/padding_8dp"
             android:text="@string/place_holder_name_and_surname"
             android:textColor="@android:color/darker_gray"
-            android:fontFamily="@font/data_latin"
+            android:textSize="@dimen/text_size_medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -84,14 +92,12 @@
             android:id="@+id/expiryDateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:paddingStart="@dimen/padding_16dp"
-            android:paddingEnd="@dimen/padding_16dp"
-            android:paddingBottom="@dimen/padding_16dp"
+            android:layout_margin="@dimen/margin_8dp"
+            android:fontFamily="@font/data_latin"
+            android:padding="@dimen/padding_8dp"
             android:text="@string/hint_mm_yy"
             android:textColor="@android:color/darker_gray"
-            android:fontFamily="@font/data_latin"
+            android:textSize="@dimen/text_size_medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

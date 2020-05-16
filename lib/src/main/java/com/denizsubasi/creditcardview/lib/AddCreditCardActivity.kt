@@ -42,7 +42,7 @@ class AddCreditCardActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(newPosition: Int) {
-
+                viewBinding.creditCardView.notifyPagerPositionChanged(newPosition)
                 if (newPosition == 3) {
                     viewBinding.creditCardView.showBackOfCard()
                 } else {
@@ -90,10 +90,10 @@ class AddCreditCardActivity : AppCompatActivity() {
 
     private fun onCardExpiryDateChanged(expiryDate: String, goNextField: Boolean = false) {
         viewBinding.creditCardView.setCardExpiryDate(expiryDate)
-        if (goNextField || expiryDate.length == 5) nextInputField()
+        if (goNextField) nextInputField()
     }
 
-    private fun onCardCvvChanged(cvv: Int, goNextField: Boolean = false) {
+    private fun onCardCvvChanged(cvv: String, goNextField: Boolean = false) {
         viewBinding.creditCardView.setCardCvv(cvv)
         if (goNextField) nextInputField()
     }

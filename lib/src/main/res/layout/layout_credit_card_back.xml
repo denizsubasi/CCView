@@ -12,9 +12,10 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/margin_16dp"
         android:background="@drawable/credit_card_background"
-        app:elevation="10dp"
         android:maxWidth="400dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:elevation="10dp">
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/blackStripImageView"
@@ -41,12 +42,13 @@
             android:id="@+id/cardCvvTextView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginEnd="@dimen/margin_8dp"
+            android:padding="@dimen/padding_8dp"
+            android:fontFamily="@font/data_latin"
             android:gravity="center"
             android:maxLength="4"
             android:textColor="@android:color/black"
+            android:hint="12334"
             app:autoSizeMaxTextSize="@dimen/text_size_regular"
-            android:fontFamily="@font/data_latin"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@id/stripImageView"
             app:layout_constraintEnd_toEndOf="@id/stripImageView"
@@ -61,6 +63,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/viewPointer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/input_view_pointer"
+            app:layout_constraintBottom_toBottomOf="@id/cardCvvTextView"
+            app:layout_constraintEnd_toEndOf="@id/cardCvvTextView"
+            app:layout_constraintStart_toStartOf="@id/cardCvvTextView"
+            app:layout_constraintTop_toTopOf="@id/cardCvvTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
