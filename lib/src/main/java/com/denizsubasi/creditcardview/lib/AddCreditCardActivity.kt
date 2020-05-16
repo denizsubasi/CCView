@@ -1,5 +1,8 @@
 package com.denizsubasi.creditcardview.lib
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -17,15 +20,37 @@ class AddCreditCardActivity : AppCompatActivity() {
 
     private var lastViewPagerPosition = 0
 
+    private var isShowingCardBackView = false
+
+    private var isCardEditing = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_credit_card)
         setClickListeners()
         setAdapters()
+
+        intent?.extras?.getParcelable<CreditCardItem>(KEY_CREDIT_CARD)?.let {
+            isCardEditing = true
+            viewBinding.creditCardView.fillDefaultItems(it)
+            cardDetailsViewPagerAdapter.fillDefaultItems(it)
+        }
     }
+
 
     private fun setClickListeners() {
         viewBinding.nextInputFieldButton.setOnClickListener {
+            if (isShowingCardBackView) {
+                Intent()
+                    .apply {
+                        putExtra(
+                            KEY_CREDIT_CARD,
+                            cardDetailsViewPagerAdapter.getCreditCardItem()
+                        )
+                    }
+                    .also { setResult(Activity.RESULT_OK, it) }
+                    .also { finish() }
+            }
             nextInputField()
         }
         viewBinding.cardDetailsViewPager.addOnPageChangeListener(object :
@@ -45,10 +70,14 @@ class AddCreditCardActivity : AppCompatActivity() {
                 viewBinding.creditCardView.notifyPagerPositionChanged(newPosition)
                 if (newPosition == 3) {
                     viewBinding.creditCardView.showBackOfCard()
+                    viewBinding.nextInputFieldButton.text = if(isCardEditing) getString(R.string.edit) else getString(R.string.addCard)
+                    isShowingCardBackView = true
                 } else {
                     if (lastViewPagerPosition == 3) {
                         viewBinding.creditCardView.showFrontOfCard()
                     }
+                    isShowingCardBackView = false
+                    viewBinding.nextInputFieldButton.text = getString(R.string.next)
                 }
                 lastViewPagerPosition = newPosition
             }
@@ -99,4 +128,18 @@ class AddCreditCardActivity : AppCompatActivity() {
     }
 
 
+    companion object {
+        const val KEY_CREDIT_CARD = "KEY_CREDIT_CARD"
+
+        @JvmStatic
+        fun newIntent(
+            context: Context,
+            creditCardItem: CreditCardItem? = null
+        ): Intent {
+            return Intent(context, AddCreditCardActivity::class.java)
+                .apply {
+                    putExtra(KEY_CREDIT_CARD, creditCardItem)
+                }
+        }
+    }
 }

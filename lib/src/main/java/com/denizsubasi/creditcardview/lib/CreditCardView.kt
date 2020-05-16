@@ -172,4 +172,11 @@ class CreditCardView @JvmOverloads constructor(
         }
     }
 
+    fun fillDefaultItems(item: CreditCardItem) {
+        viewBinding.frontView.cardNumberTextView.text = item.cardNumber
+        viewBinding.frontView.cardHolderNameTextView.text = item.holderName
+        viewBinding.frontView.expiryDateTextView.text = item.expiryDate
+        viewBinding.backView.cardCvvTextView.text = item.cvv
+    }
+
 }

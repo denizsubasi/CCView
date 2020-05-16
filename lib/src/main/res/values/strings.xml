@@ -17,5 +17,7 @@
     <string name="card_holder_name_sample">Deniz Subaşı</string>
     <string name="next">Next</string>
     <string name="type_in_your_card_details">"Type in your card details: "</string>
+    <string name="addCard">Add</string>
+    <string name="edit">Edit</string>
 
 </resources>
