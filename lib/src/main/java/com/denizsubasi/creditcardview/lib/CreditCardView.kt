@@ -33,13 +33,13 @@ class CreditCardView @JvmOverloads constructor(
 
 
     init {
-        viewBinding.frontView.cardHolderNameTextView.text = "Deniz Subaşı"
         viewBinding.frontView.cardNumberTextView.afterMeasured {
             viewBinding.frontView.viewPointer.moveTo(this)
         }
     }
 
     fun setCardNumber(cardNumber: String, cardType: CardType) {
+        setCardType(cardType)
         viewBinding.frontView.cardNumberTextView.text = cardNumber
         viewBinding.frontView.cardNumberTextView.format(cardType.cardNumberMask())
         viewBinding.frontView.viewPointer.moveTo(viewBinding.frontView.cardNumberTextView)
@@ -114,7 +114,7 @@ class CreditCardView @JvmOverloads constructor(
         viewBinding.frontView.viewPointer.moveTo(viewBinding.frontView.expiryDateTextView)
     }
 
-    fun setCardType(cardType: CardType) {
+    private fun setCardType(cardType: CardType) {
         when (cardType) {
             UNKNOWN_CARD -> {
                 viewBinding.frontView.cardTypeImageView.setImageResource(0)

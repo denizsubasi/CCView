@@ -3,6 +3,7 @@ package com.denizsubasi.creditcardview.lib.utils
 import android.text.Editable
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
+import com.denizsubasi.creditcardview.lib.CreditCardItem
 import java.util.*
 import java.util.regex.Pattern
 
@@ -39,6 +40,10 @@ fun CharSequence.selectCardType(): CardType {
 
 fun CardType.cardLength(): Int {
     return if (this == CardType.AMEX_CARD) MAX_LENGTH_CARD_NUMBER_AMEX else MAX_LENGTH_CARD_NUMBER
+}
+
+fun CardType.cvvLength(): Int {
+    return if (this == CardType.AMEX_CARD) 4 else 3
 }
 
 fun CardType.cardNumberMask(): String {
@@ -105,4 +110,32 @@ fun AppCompatEditText.format(mask: String) {
 
 fun AppCompatTextView.format(mask: String) {
     text = text.toString().formatByMask(mask)
+}
+
+fun CreditCardItem.checkIfCardExpired(): Boolean {
+    val month: String
+    var year = ""
+    if (expiryDate.length >= 2) {
+        month = expiryDate.substring(0, 2)
+        if (expiryDate.length > 2) {
+            year = expiryDate.substring(3)
+        }
+        val mm = month.toInt()
+        if (mm <= 0 || mm >= 13) {
+            return true
+        }
+        if (expiryDate.length >= 4) {
+            val yy = year.toInt()
+            val calendar = Calendar.getInstance()
+            val currentYear = calendar[Calendar.YEAR]
+            val currentMonth = calendar[Calendar.MONTH] + 1
+            val millennium = currentYear / 1000 * 1000
+            if (yy + millennium < currentYear) {
+                return true
+            } else if (yy + millennium == currentYear && mm < currentMonth) {
+                return true
+            }
+        }
+    }
+    return false
 }

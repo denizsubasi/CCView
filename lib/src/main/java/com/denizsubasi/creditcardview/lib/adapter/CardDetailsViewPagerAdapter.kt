@@ -36,7 +36,7 @@ class CardDetailsViewPagerAdapter(
 
     private val expiryDateTextWatcher = MaskTextWatcher(CARD_EXPIRY_DATE_FORMAT)
 
-    private var creditCardItem = CreditCardItem()
+    private var creditCardItem = CreditCardItem(id = UUID.randomUUID().toString())
 
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -56,7 +56,7 @@ class CardDetailsViewPagerAdapter(
                             cardNumberEditText.format(cardType.cardNumberMask())
                             applyingMask = false
                             creditCardItem.cardNumber = it.toString().replace(" ", "")
-                            cardNumberCallbackFunc(creditCardItem.cardNumber, cardType, false)
+                            cardNumberCallbackFunc(creditCardItem.cardNumber, cardType,  creditCardItem.cardNumber.length == cardType.cardLength())
                         }
                         onNext(hideKeyboard = false) {
                             if (it.isNotBlank()) {
@@ -92,10 +92,10 @@ class CardDetailsViewPagerAdapter(
                     cardExpiryDateEditText.apply {
                         setText(creditCardItem.expiryDate)
                         addTextChangedListener {
-                            if (checkIfCardExpired(it.toString()).not()) {
+                            creditCardItem.expiryDate = it.toString()
+                            if (creditCardItem.checkIfCardExpired().not()) {
                                 cardExpiryDateEditText.background =
                                     getDrawable(context, R.drawable.input_field_background)
-                                creditCardItem.expiryDate = it.toString()
                                 cardExpiryDateCallbackFunc(creditCardItem.expiryDate, false)
                             } else {
                                 cardExpiryDateEditText.background =
@@ -129,34 +129,6 @@ class CardDetailsViewPagerAdapter(
             }
 
         }
-    }
-
-    private fun checkIfCardExpired(text: String): Boolean {
-        val month: String
-        var year = ""
-        if (text.length >= 2) {
-            month = text.substring(0, 2)
-            if (text.length > 2) {
-                year = text.substring(3)
-            }
-            val mm = month.toInt()
-            if (mm <= 0 || mm >= 13) {
-                return true
-            }
-            if (text.length >= 4) {
-                val yy = year.toInt()
-                val calendar = Calendar.getInstance()
-                val currentYear = calendar[Calendar.YEAR]
-                val currentMonth = calendar[Calendar.MONTH] + 1
-                val millennium = currentYear / 1000 * 1000
-                if (yy + millennium < currentYear) {
-                    return true
-                } else if (yy + millennium == currentYear && mm < currentMonth) {
-                    return true
-                }
-            }
-        }
-        return false
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {

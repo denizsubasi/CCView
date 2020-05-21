@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.denizsubasi.creditcardview.lib.CreditCardItem" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_12dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/holderNameTextView"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="@{item.holderName}"
+            android:textSize="18sp"
+            tools:text="Deniz Subaşı" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Widget.AppCompat.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/holderNameTextView"
+            android:text="@{item.cardNumber}"
+            tools:text="Deniz Subaşı" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/editTextView"
+            style="@style/Widget.AppCompat.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/padding_8dp"
+            android:text="@string/edit"
+            android:textSize="@dimen/text_size_large" />
+
+
+    </RelativeLayout>
+</layout>

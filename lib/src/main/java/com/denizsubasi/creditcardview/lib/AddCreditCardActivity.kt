@@ -9,8 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
 import com.denizsubasi.creditcardview.lib.adapter.CardDetailsViewPagerAdapter
 import com.denizsubasi.creditcardview.lib.databinding.ActivityAddCreditCardBinding
-import com.denizsubasi.creditcardview.lib.utils.CardType
-import com.denizsubasi.creditcardview.lib.utils.cardLength
+import com.denizsubasi.creditcardview.lib.utils.*
 
 class AddCreditCardActivity : AppCompatActivity() {
 
@@ -20,7 +19,7 @@ class AddCreditCardActivity : AppCompatActivity() {
 
     private var lastViewPagerPosition = 0
 
-    private var isShowingCardBackView = false
+    private var cvvPagerPosition = 3
 
     private var isCardEditing = false
 
@@ -29,7 +28,6 @@ class AddCreditCardActivity : AppCompatActivity() {
         viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_credit_card)
         setClickListeners()
         setAdapters()
-
         intent?.extras?.getParcelable<CreditCardItem>(KEY_CREDIT_CARD)?.let {
             isCardEditing = true
             viewBinding.creditCardView.fillDefaultItems(it)
@@ -40,18 +38,21 @@ class AddCreditCardActivity : AppCompatActivity() {
 
     private fun setClickListeners() {
         viewBinding.nextInputFieldButton.setOnClickListener {
-            if (isShowingCardBackView) {
-                Intent()
-                    .apply {
-                        putExtra(
-                            KEY_CREDIT_CARD,
-                            cardDetailsViewPagerAdapter.getCreditCardItem()
-                        )
-                    }
-                    .also { setResult(Activity.RESULT_OK, it) }
-                    .also { finish() }
+            if (isLastPage()) {
+                if (checkValidation()) {
+                    Intent()
+                        .apply {
+                            putExtra(
+                                KEY_CREDIT_CARD,
+                                cardDetailsViewPagerAdapter.getCreditCardItem()
+                            )
+                        }
+                        .also { setResult(Activity.RESULT_OK, it) }
+                        .also { finish() }
+                }
+            } else {
+                nextInputField()
             }
-            nextInputField()
         }
         viewBinding.cardDetailsViewPager.addOnPageChangeListener(object :
             ViewPager.OnPageChangeListener {
@@ -68,15 +69,14 @@ class AddCreditCardActivity : AppCompatActivity() {
 
             override fun onPageSelected(newPosition: Int) {
                 viewBinding.creditCardView.notifyPagerPositionChanged(newPosition)
-                if (newPosition == 3) {
+                if (newPosition == cvvPagerPosition) {
                     viewBinding.creditCardView.showBackOfCard()
-                    viewBinding.nextInputFieldButton.text = if(isCardEditing) getString(R.string.edit) else getString(R.string.addCard)
-                    isShowingCardBackView = true
+                    viewBinding.nextInputFieldButton.text =
+                        if (isCardEditing) getString(R.string.edit) else getString(R.string.addCard)
                 } else {
-                    if (lastViewPagerPosition == 3) {
+                    if (lastViewPagerPosition == cvvPagerPosition) {
                         viewBinding.creditCardView.showFrontOfCard()
                     }
-                    isShowingCardBackView = false
                     viewBinding.nextInputFieldButton.text = getString(R.string.next)
                 }
                 lastViewPagerPosition = newPosition
@@ -97,6 +97,32 @@ class AddCreditCardActivity : AppCompatActivity() {
         viewBinding.cardDetailsViewPager.adapter = cardDetailsViewPagerAdapter
     }
 
+    private fun checkValidation(): Boolean {
+        var isValid: Boolean
+        with(cardDetailsViewPagerAdapter.getCreditCardItem()) {
+            isValid = when {
+                cardNumber.length != cardNumber.selectCardType().cardLength() -> {
+                    viewBinding.cardDetailsViewPager.currentItem = 0
+                    false
+                }
+                holderName.isBlank() -> {
+                    viewBinding.cardDetailsViewPager.currentItem = 1
+                    false
+                }
+                checkIfCardExpired() -> {
+                    viewBinding.cardDetailsViewPager.currentItem = 2
+                    false
+                }
+                cvv.isBlank() -> {
+                    viewBinding.cardDetailsViewPager.currentItem = 3
+                    false
+                }
+                else -> true
+            }
+        }
+        return isValid
+    }
+
     private fun nextInputField() {
         viewBinding.cardDetailsViewPager.currentItem =
             viewBinding.cardDetailsViewPager.currentItem + 1
@@ -108,8 +134,7 @@ class AddCreditCardActivity : AppCompatActivity() {
         goNextField: Boolean = false
     ) {
         viewBinding.creditCardView.setCardNumber(number, cardType)
-        viewBinding.creditCardView.setCardType(cardType)
-        if (goNextField || number.length == cardType.cardLength()) nextInputField()
+        if (goNextField) nextInputField()
     }
 
     private fun onCardHolderNameChanged(holderName: String, goNextField: Boolean = false) {
@@ -127,6 +152,7 @@ class AddCreditCardActivity : AppCompatActivity() {
         if (goNextField) nextInputField()
     }
 
+    private fun isLastPage(): Boolean = lastViewPagerPosition == cvvPagerPosition
 
     companion object {
         const val KEY_CREDIT_CARD = "KEY_CREDIT_CARD"
