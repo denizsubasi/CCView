@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.denizsubasi.creditcardview" >
+
+    <application>
+        <activity android:name=".AddCreditCardActivity" />
+    </application>
+</manifest>
