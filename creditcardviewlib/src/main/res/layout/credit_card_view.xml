@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <data>
+    <include
+        android:id="@+id/backView"
+        layout="@layout/layout_credit_card_back" />
 
-    </data>
+    <include
+        android:id="@+id/frontView"
+        layout="@layout/layout_credit_card_front" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include
-            android:id="@+id/backView"
-            layout="@layout/layout_credit_card_back" />
-
-        <include
-            android:id="@+id/frontView"
-            layout="@layout/layout_credit_card_front" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

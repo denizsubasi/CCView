@@ -12,14 +12,14 @@ import androidx.viewpager.widget.PagerAdapter
 import com.denizsubasi.creditcardview.CardInputType.*
 import com.denizsubasi.creditcardview.CreditCardItem
 import com.denizsubasi.creditcardview.R
-import com.denizsubasi.creditcardview.databinding.LayoutCardCvvBinding
-import com.denizsubasi.creditcardview.databinding.LayoutCardExpiryDateBinding
-import com.denizsubasi.creditcardview.databinding.LayoutCardHolderNameBinding
-import com.denizsubasi.creditcardview.databinding.LayoutCardNumberBinding
 import com.denizsubasi.creditcardview.ext.onDone
 import com.denizsubasi.creditcardview.ext.onNext
 import com.denizsubasi.creditcardview.utils.*
 import com.denizsubasi.creditcardview.utils.*
+import kotlinx.android.synthetic.main.layout_card_cvv.view.*
+import kotlinx.android.synthetic.main.layout_card_expiry_date.view.*
+import kotlinx.android.synthetic.main.layout_card_holder_name.view.*
+import kotlinx.android.synthetic.main.layout_card_number.view.*
 import java.util.*
 
 class CardDetailsViewPagerAdapter(
@@ -44,9 +44,9 @@ class CardDetailsViewPagerAdapter(
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val item = items[position]
-        return when (item.inputType) {
+        val view = when (item.inputType) {
             NUMBER -> {
-                LayoutCardNumberBinding.inflate(inflater, container, true).apply {
+                from(context).inflate(R.layout.layout_card_number, container, false).apply {
                     var applyingMask = false
                     cardNumberEditText.apply {
                         setText(creditCardItem.cardNumber)
@@ -71,10 +71,11 @@ class CardDetailsViewPagerAdapter(
                             }
                         }
                     }
-                }.root
+                }
+
             }
             HOLDER_NAME -> {
-                LayoutCardHolderNameBinding.inflate(inflater, container, true).apply {
+                from(context).inflate(R.layout.layout_card_holder_name, container, false).apply {
                     cardholderNameEditText.apply {
                         setText(creditCardItem.holderName)
                         addTextChangedListener {
@@ -87,10 +88,10 @@ class CardDetailsViewPagerAdapter(
                             }
                         }
                     }
-                }.root
+                }
             }
             EXPIRY_DATE -> {
-                LayoutCardExpiryDateBinding.inflate(inflater, container, true).apply {
+                from(context).inflate(R.layout.layout_card_expiry_date, container, false).apply {
                     cardExpiryDateEditText.addTextChangedListener(expiryDateTextWatcher)
                     cardExpiryDateEditText.apply {
                         setText(creditCardItem.expiryDate)
@@ -112,10 +113,10 @@ class CardDetailsViewPagerAdapter(
                             }
                         }
                     }
-                }.root
+                }
             }
             CVV -> {
-                LayoutCardCvvBinding.inflate(inflater, container, true).apply {
+                from(context).inflate(R.layout.layout_card_cvv, container, false).apply {
                     cardCvvEditText.apply {
                         setText(creditCardItem.cvv)
                         addTextChangedListener {
@@ -128,10 +129,13 @@ class CardDetailsViewPagerAdapter(
                             }
                         }
                     }
-                }.root
+                }
             }
 
         }
+
+        container.addView(view)
+        return view
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
