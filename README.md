@@ -41,7 +41,7 @@ allprojects {
 }
 
 dependencies {
-    implementation 'com.github.denizsubasi:CreditCardView:0.3'
+    implementation 'com.github.denizsubasi:CCView:0.3'
 }
 ```
 
